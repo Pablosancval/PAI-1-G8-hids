@@ -40,11 +40,26 @@ def folderHash(pathName):       ## esta función te permite seleccionar el tipo 
     for root, dirs, files in os.walk(pathName):
         for file in files:
             with open(os.path.join(root, file), "rb") as fileRaw:
-                if(configDict["Selected Hash mode"].lower() == "sha3_256"):
+                if(configDict["Selected Hash mode"].lower() == "sha3_256"):  ## a cambiar cuando se haga por una lista con las diferentes opciones
                     fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.sha3_256(
+                        fileRaw.read()).hexdigest()
+                elif(configDict["Selected Hash mode"].lower() == "sha3_384"):
+                    fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.sha3_384(
                         fileRaw.read()).hexdigest()
                 elif(configDict["Selected Hash mode"].lower() == "sha3_512"):
                     fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.sha3_512(
+                        fileRaw.read()).hexdigest()
+                elif(configDict["Selected Hash mode"].lower() == "sha_256"):
+                    fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.sha256(
+                        fileRaw.read()).hexdigest()
+                elif(configDict["Selected Hash mode"].lower() == "sha_512"):
+                    fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.sha512(
+                        fileRaw.read()).hexdigest()
+                elif(configDict["Selected Hash mode"].lower() == "shake_128"):
+                    fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.shake_128(
+                        fileRaw.read()).hexdigest()
+                elif(configDict["Selected Hash mode"].lower() == "shake_256"):
+                    fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.shake_256(
                         fileRaw.read()).hexdigest()
     return fileAndHash
 
