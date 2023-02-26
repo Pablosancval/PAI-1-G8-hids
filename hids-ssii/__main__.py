@@ -36,7 +36,6 @@ toaster = ToastNotifier()
 switch_value = True
 currentThemeBG = "#26242f"
 currentThemeFont = "white"
-themeSwapText = "Ir a tema claro"
 
 
 def folderHash(pathName):       ## esta función te permite seleccionar el tipo de hasheo en función del texto que se le pasa sobre la carpeta especificada
@@ -327,11 +326,10 @@ def theme_swap():
 
 def gui():
     global switch_value
-    global themeSwapText
     global currentThemeBG
     global currentThemeFont
 
-    btnTheme = tk.Button(window, bg=currentThemeBG, text=themeSwapText, fg=currentThemeFont, command=theme_swap)
+    btnTheme = tk.Button(window, bg=currentThemeBG, text="cambiar tema", fg=currentThemeFont, command=theme_swap)
     btnTheme.pack(pady=15, padx=15)
     btnTheme.place(x=1230, y=435)
 
