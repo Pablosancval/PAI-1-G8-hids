@@ -71,10 +71,10 @@ def folderHash(pathName):       ## esta función te permite seleccionar el tipo 
                         fileRaw.read()).hexdigest()
                 elif(valor_seleccionado.get() == "shake_128"):
                     fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.shake_128(
-                        fileRaw.read()).hexdigest()
+                        fileRaw.read()).hexdigest(15)
                 elif(valor_seleccionado.get() == "shake_256"):
                     fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.shake_256(
-                        fileRaw.read()).hexdigest()
+                        fileRaw.read()).hexdigest(30)
     return fileAndHash
 
 
