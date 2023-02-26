@@ -40,6 +40,9 @@ toaster = ToastNotifier()
 switch_value = True
 currentThemeBG = "#26242f"
 currentThemeFont = "white"
+lista_hashes = ["sha3_256", "sha3_384", "sha3_512", "sha_256", "sha_512", "shake_128", "shake_256"]
+valor_seleccionado = tk.StringVar(window)
+valor_seleccionado.set("sha_256")
 
 
 def folderHash(pathName):       ## esta función te permite seleccionar el tipo de hasheo en función del texto que se le pasa sobre la carpeta especificada
@@ -51,25 +54,25 @@ def folderHash(pathName):       ## esta función te permite seleccionar el tipo 
     for root, dirs, files in os.walk(pathName):
         for file in files:
             with open(os.path.join(root, file), "rb") as fileRaw:
-                if(configDict["Selected Hash mode"].lower() == "sha3_256"):  ## a cambiar cuando se haga por una lista con las diferentes opciones
+                if(valor_seleccionado.get() == "sha3_256"):  ## a cambiar cuando se haga por una lista con las diferentes opciones
                     fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.sha3_256(
                         fileRaw.read()).hexdigest()
-                elif(configDict["Selected Hash mode"].lower() == "sha3_384"):
+                elif(valor_seleccionado.get() == "sha3_384"):                       ##valor_seleccionado.get()
                     fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.sha3_384(
                         fileRaw.read()).hexdigest()
-                elif(configDict["Selected Hash mode"].lower() == "sha3_512"):
+                elif(valor_seleccionado.get() == "sha3_512"):
                     fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.sha3_512(
                         fileRaw.read()).hexdigest()
-                elif(configDict["Selected Hash mode"].lower() == "sha_256"):
+                elif(valor_seleccionado.get() == "sha_256"):
                     fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.sha256(
                         fileRaw.read()).hexdigest()
-                elif(configDict["Selected Hash mode"].lower() == "sha_512"):
+                elif(valor_seleccionado.get() == "sha_512"):
                     fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.sha512(
                         fileRaw.read()).hexdigest()
-                elif(configDict["Selected Hash mode"].lower() == "shake_128"):
+                elif(valor_seleccionado.get() == "shake_128"):
                     fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.shake_128(
                         fileRaw.read()).hexdigest()
-                elif(configDict["Selected Hash mode"].lower() == "shake_256"):
+                elif(valor_seleccionado.get() == "shake_256"):
                     fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.shake_256(
                         fileRaw.read()).hexdigest()
     return fileAndHash
@@ -349,6 +352,11 @@ def gui():
     btnTheme = tk.Button(window, bg=currentThemeBG, text="cambiar tema", fg=currentThemeFont, command=theme_swap)
     btnTheme.pack(pady=15, padx=15)
     btnTheme.place(x=1230, y=435)
+
+    question_menu = tk.OptionMenu(window,valor_seleccionado,*lista_hashes)
+    question_menu.pack(pady=15, padx=15)
+    question_menu.place(x=20, y=350)
+    question_menu.config(bg=currentThemeBG, fg=currentThemeFont)
 
     labelConf = tk.Label(window, bg=currentThemeBG, text="Fichero de configuración", fg=currentThemeFont, font=("Arial", 14))
     labelLog = tk.Label(window, bg=currentThemeBG, text="Fichero de log en tiempo real", fg=currentThemeFont, font=("Arial", 14))
