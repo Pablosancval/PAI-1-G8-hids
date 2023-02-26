@@ -306,7 +306,7 @@ def sendEmail(bodyMsg):  ## entiendo que esto es para un aviso por correo cuando
         print("Ha ocurrido un error enviando el mensaje.")
 
 
-def themeSwap():
+def theme_swap():
     global switch_value
     global themeSwapText
     global currentThemeBG
@@ -323,14 +323,15 @@ def themeSwap():
         currentThemeFont = "white"
         switch_value = True
 
+    gui() ##si no se vuelve a llamar a GUI por algún motivo no refresca el cambio de tema
 
-def gui():  ## interfaz de usuario
+def gui():
     global switch_value
-    global currentThemeBG
     global themeSwapText
+    global currentThemeBG
     global currentThemeFont
 
-    btnTheme = tk.Button(window, bg=currentThemeBG, text=themeSwapText, fg=currentThemeFont, command=themeSwap)
+    btnTheme = tk.Button(window, bg=currentThemeBG, text=themeSwapText, fg=currentThemeFont, command=theme_swap)
     btnTheme.pack(pady=15, padx=15)
     btnTheme.place(x=1230, y=435)
 
@@ -363,7 +364,6 @@ def gui():  ## interfaz de usuario
 
     window.mainloop()
 
-
 def stop():  ## entiendo que esto es por si peta
     toaster.show_toast(
         "HIDS", "Servicio interrumpido. El sistema NO está examinando los directorios.", threaded=True)
@@ -391,7 +391,6 @@ def iniciar():  ## no entiendo que hace exactamente, parece que coge el path abs
                         datefmt='%m/%d/%Y %H:%M:%S', filename=filename, level=logging.INFO)
     importConfig()
     gui()
-
 
 if __name__ == "__main__":
     iniciar()
