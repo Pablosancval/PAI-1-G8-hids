@@ -26,9 +26,17 @@ now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 interval = 0
 running = bool()
 window = tk.Tk()
+window.geometry("1340x512")
+window.resizable(0, 0)
+window.title("HIDS G8 PAI 1")
 entry = ScrolledText(window, width=80, height=20)
 logBox = ScrolledText(window, width=80, height=20)
 toaster = ToastNotifier()
+
+switch_value = True
+currentThemeBG = "#26242f"
+currentThemeFont = "white"
+themeSwapText = "Ir a tema claro"
 
 
 def folderHash(pathName):       ## esta función te permite seleccionar el tipo de hasheo en función del texto que se le pasa sobre la carpeta especificada
@@ -298,44 +306,61 @@ def sendEmail(bodyMsg):  ## entiendo que esto es para un aviso por correo cuando
         print("Ha ocurrido un error enviando el mensaje.")
 
 
+def themeSwap():
+    global switch_value
+    global themeSwapText
+    global currentThemeBG
+    global currentThemeFont
+    
+    if switch_value == True:
+        themeSwapText = "Ir a tema oscuro"
+        currentThemeBG = "white"
+        currentThemeFont = "black"
+        switch_value = False
+    else:
+        themeSwapText = "Ir a tema claro"
+        currentThemeBG = "#26242f"
+        currentThemeFont = "white"
+        switch_value = True
+
+
 def gui():  ## interfaz de usuario
-    window.resizable(0, 0)
-    window.geometry("1340x512")
-    labelInicio = tk.Label(window, text="Iniciar el examen ")
-    labelStop = tk.Label(window, text="Parar el examen ")
-    labelGraph = tk.Label(window, text="Abrir gráfico ")
-    labelConf = tk.Label(window, text="Fichero de configuración")
-    labelLog = tk.Label(window, text="Fichero de LOG")
-    labelInicio.pack()
-    labelInicio.place(x=510, y=410)
-    labelStop.pack()
-    labelStop.place(x=728, y=410)
-    labelGraph.pack()
-    labelGraph.place(x=630, y=410)
+    global switch_value
+    global currentThemeBG
+    global themeSwapText
+    global currentThemeFont
+
+    btnTheme = tk.Button(window, bg=currentThemeBG, text=themeSwapText, fg=currentThemeFont, command=themeSwap)
+    btnTheme.pack(pady=15, padx=15)
+    btnTheme.place(x=1230, y=435)
+
+    labelConf = tk.Label(window, bg=currentThemeBG, text="Fichero de configuración", fg=currentThemeFont, font=("Arial", 14))
+    labelLog = tk.Label(window, bg=currentThemeBG, text="Fichero de log en tiempo real", fg=currentThemeFont, font=("Arial", 14))
     labelConf.pack()
-    labelConf.place(x=230, y=333)
+    labelConf.place(x=180, y=333)
     labelLog.pack()
-    labelLog.place(x=950, y=333)
+    labelLog.place(x=870, y=333)
     entry.pack()
+    entry.config(bg=currentThemeBG, fg=currentThemeFont)
     entry.place(x=5, y=0)
-    window.title("HIDS")
-    btnGraph = tk.Button(window, text="Abrir grafico", command=graph)
+    window.config(bg=currentThemeBG)
+    btnGraph = tk.Button(window, bg=currentThemeBG, text="Abrir grafico", fg=currentThemeFont, command=graph)
     btnGraph.pack(pady=15, padx=15)
-    btnGraph.place(x=628, y=435)
-    btnIniciar = tk.Button(window, text="Iniciar",
-                           command=initExam)
+    btnGraph.place(x=630, y=435)
+    btnIniciar = tk.Button(window, bg=currentThemeBG, text="Iniciar el examen", fg=currentThemeFont, command=initExam)
     btnIniciar.pack(pady=15, padx=15)
-    btnIniciar.place(x=535, y=435)
-    btnCerrar = tk.Button(window, text="Parar", command=stop)
-    btnCerrar.pack(pady=15, padx=15)
-    btnCerrar.place(x=751, y=435)
-    btnGuardar = tk.Button(
-        window, text="Guardar configuración", command=exportConfig)
+    btnIniciar.place(x=510, y=435)
+    btnDetener = tk.Button(window, bg=currentThemeBG, text="Parar el examen", fg=currentThemeFont, command=stop)
+    btnDetener.pack(pady=15, padx=15)
+    btnDetener.place(x=730, y=435)
+    btnGuardar = tk.Button(window, bg=currentThemeBG, text="Guardar configuración", fg=currentThemeFont, command=exportConfig)
     btnGuardar.pack(pady=15, padx=15)
-    btnGuardar.place(x=532, y=330)
+    btnGuardar.place(x=220, y=370)
     logBox.pack()
+    logBox.config(bg=currentThemeBG, fg=currentThemeFont)
     logBox.place(x=670, y=0)
     window.protocol("WM_DELETE_WINDOW", stopAndClose)
+
     window.mainloop()
 
 
