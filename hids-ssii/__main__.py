@@ -307,17 +307,14 @@ def sendEmail(bodyMsg):  ## entiendo que esto es para un aviso por correo cuando
 
 def theme_swap():
     global switch_value
-    global themeSwapText
     global currentThemeBG
     global currentThemeFont
     
     if switch_value == True:
-        themeSwapText = "Ir a tema oscuro"
         currentThemeBG = "white"
         currentThemeFont = "black"
         switch_value = False
     else:
-        themeSwapText = "Ir a tema claro"
         currentThemeBG = "#26242f"
         currentThemeFont = "white"
         switch_value = True
