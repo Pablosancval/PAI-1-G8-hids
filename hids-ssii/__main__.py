@@ -14,6 +14,8 @@ from tkinter.scrolledtext import ScrolledText
 from win10toast import ToastNotifier
 import smtplib
 from pathlib import Path
+import matplotlib.pyplot as plt
+import numpy as np
 
 # GLOBALS
 configDict = dict()
@@ -210,6 +212,8 @@ def compareHashes():  ## comparador de hashes para comprobar que los archivos no
             cadena = "DIR: " + str(key) + " ¡Los hashes no coinciden!"
             listOfNoMatches.append(cadena)
     badIntegrity.append(numberOfFilesNoOk)
+    numberOfGoodIntegrity.append(numberOfFilesOK)
+    numberOfBadIntegrity.append(numberOfFilesNoOk)
     graphDate.append(datetime.datetime.now().strftime("%M"))
     str1 = "Número de archivos OK: " + str(numberOfFilesOK)
     str2 = "Número de archivos MODIFICADOS: " + str(numberOfFilesNoOk)
@@ -246,6 +250,20 @@ def graph():  ## creo que no es intrinsecamente necesaria para el programa
                  title=layout_title,
                  labels={'x': 'Hora', 'y': 'Numero de fallos de integridad'})
     fig.show()
+
+def graph2():  ## muestra grafico con forma de queso de los archivos
+    
+    labels = 'Archivos Ok','Archivos modificados'
+    sizes = [numberOfGoodIntegrity[-1],numberOfBadIntegrity[-1]]
+    fig, ax = plt.subplots()
+    def func(pct, allvals):
+        absolute = int(np.round(pct/100.*np.sum(allvals)))
+        return f"{pct:.1f}%\n({absolute:d})"
+    ax.pie(sizes, labels=labels,autopct=lambda pct: func(pct, sizes))
+    ax.set_title("Grafico de la integridad de los archivos\n"+"Numero Total de archivos:"+str(numberOfGoodIntegrity[-1]+numberOfBadIntegrity[-1])+"\nNúmero de archivos OK:"+str(numberOfGoodIntegrity[-1])
+          +"\nNúmero de archivos modificados:"+str(numberOfBadIntegrity[-1]))
+    
+    plt.show()
 
 
 def run():  ## empieza a llamar a las funciones en serie en el momento en que se invoca
@@ -340,7 +358,7 @@ def gui():
     entry.config(bg=currentThemeBG, fg=currentThemeFont)
     entry.place(x=5, y=0)
     window.config(bg=currentThemeBG)
-    btnGraph = tk.Button(window, bg=currentThemeBG, text="Abrir grafico", fg=currentThemeFont, command=graph)
+    btnGraph = tk.Button(window, bg=currentThemeBG, text="Abrir grafico", fg=currentThemeFont, command=graph2)
     btnGraph.pack(pady=15, padx=15)
     btnGraph.place(x=630, y=435)
     btnIniciar = tk.Button(window, bg=currentThemeBG, text="Iniciar el examen", fg=currentThemeFont, command=initExam)
