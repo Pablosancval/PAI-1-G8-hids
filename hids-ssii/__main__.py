@@ -17,6 +17,9 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import random
+from  tkinter import *
+import tkinter.filedialog as tkFileDialog
+
 
 
 
@@ -28,6 +31,7 @@ badIntegrity = list()
 graphDate = list()
 numberOfGoodIntegrity = list()
 numberOfBadIntegrity = list()
+directorio=str()
 cantidadDeArchivos = [0, 1000]
 now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 interval = 0
@@ -355,6 +359,11 @@ def theme_swap():
 
     gui() ##si no se vuelve a llamar a GUI por algún motivo no refresca el cambio de tema
 
+def openDirectory():
+    directorio = tkFileDialog.askdirectory()
+    norm_path = os.path.normpath(directorio)
+    configDict["Directories to protect"]=norm_path
+
 def gui():
     global switch_value
     global currentThemeBG
@@ -368,6 +377,10 @@ def gui():
     question_menu.pack(pady=15, padx=15)
     question_menu.place(x=20, y=350)
     question_menu.config(bg=currentThemeBG, fg=currentThemeFont)
+
+    btnDirectory = tk.Button(window, bg=currentThemeBG, text="Seleccionar directorio", fg=currentThemeFont, command=openDirectory)
+    btnDirectory.pack(pady=15, padx=15)
+    btnDirectory.place(x=20, y=390)
 
     interval_menu = tk.OptionMenu(window,intervalo_seleccionado,*lista_intervalos)
     interval_menu.pack(pady=15, padx=15)
