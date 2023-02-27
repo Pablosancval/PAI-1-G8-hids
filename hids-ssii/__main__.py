@@ -16,6 +16,9 @@ import smtplib
 from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
+import random
+
+
 
 # GLOBALS
 configDict = dict()
@@ -36,6 +39,7 @@ window.title("HIDS G8 PAI 1")
 entry = ScrolledText(window, width=80, height=20)
 logBox = ScrolledText(window, width=80, height=20)
 toaster = ToastNotifier()
+salt = random.randint(0,10000)
 
 switch_value = True
 currentThemeBG = "#26242f"
@@ -44,12 +48,19 @@ lista_hashes = ["sha3_256", "sha3_384", "sha3_512", "sha_256", "sha_512", "shake
 valor_seleccionado = tk.StringVar(window)
 valor_seleccionado.set("sha_256")
 
+lista_intervalos = ["10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+intervalo_seleccionado = tk.StringVar(window)
+intervalo_seleccionado.set("10")
+
 
 def folderHash(pathName):       ## esta función te permite seleccionar el tipo de hasheo en función del texto que se le pasa sobre la carpeta especificada
     """ Params: ruta """
     """ Return: devuelve un diccionario formato por la ruta y el hash: key=ruta, value=hash """
     """ Se le pasa una ruta y viaja por todos los archivos y las subrutas de dicha ruta y calcula los hashes
     de cada uno de los archivos encontrados """
+
+    global salt
+
     fileAndHash = dict()
     for root, dirs, files in os.walk(pathName):
         for file in files:
@@ -71,10 +82,10 @@ def folderHash(pathName):       ## esta función te permite seleccionar el tipo 
                         fileRaw.read()).hexdigest()
                 elif(valor_seleccionado.get() == "shake_128"):
                     fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.shake_128(
-                        fileRaw.read()).hexdigest(15)
+                        fileRaw.read()).hexdigest(salt)
                 elif(valor_seleccionado.get() == "shake_256"):
                     fileAndHash[os.path.join(root, file).replace("\\", "/")] = hashlib.shake_256(
-                        fileRaw.read()).hexdigest(30)
+                        fileRaw.read()).hexdigest(salt)
     return fileAndHash
 
 
@@ -302,7 +313,7 @@ def initExam():  ## parece una prueba de los logs y tal
     root_logger = logging.getLogger("")
     root_logger.addHandler(console)
     global interval
-    interval = int(configDict["Verify interval"])
+    interval = int(intervalo_seleccionado.get())
     # supuestamente el admin nos pasa a nosotros el hasheado de todos los archivos -> Si no, ejecutar exportHashedFiles()
     exportHashedFiles()
     importHashedFiles()
@@ -357,6 +368,11 @@ def gui():
     question_menu.pack(pady=15, padx=15)
     question_menu.place(x=20, y=350)
     question_menu.config(bg=currentThemeBG, fg=currentThemeFont)
+
+    interval_menu = tk.OptionMenu(window,intervalo_seleccionado,*lista_intervalos)
+    interval_menu.pack(pady=15, padx=15)
+    interval_menu.place(x=100, y=350)
+    interval_menu.config(bg=currentThemeBG, fg=currentThemeFont)
 
     labelConf = tk.Label(window, bg=currentThemeBG, text="Fichero de configuración", fg=currentThemeFont, font=("Arial", 14))
     labelLog = tk.Label(window, bg=currentThemeBG, text="Fichero de log en tiempo real", fg=currentThemeFont, font=("Arial", 14))
