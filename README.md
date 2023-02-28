@@ -3,6 +3,7 @@ Proyecto para la universidad, creación de un pequeño sistema de verificación 
 
 ## Setup del proyecto actual
 `sudo pip install hids-ssii`
+`sudo pip install matplotlib` (en caso que no se tenga de antemano la librería)
 
 `python -m hids-ssii`
 

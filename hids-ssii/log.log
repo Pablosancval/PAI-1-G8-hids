@@ -1,27 +1,62 @@
-INFO:10/29/2020 17:35:15: La configuración se ha importado correctamente!
-INFO:10/29/2020 17:35:50: Hashes importados correctamente!
-INFO:10/29/2020 17:35:50: Calculando los hashes de los archivos...
-INFO:10/29/2020 17:36:11: Hashes calculados satisfactoriamente!
-INFO:10/29/2020 17:36:11: Number of files OK: 2874
-INFO:10/29/2020 17:36:11: Number of files BAD: 1
-WARNING:10/29/2020 17:36:11: BAD integrity files: 
-           DIR: C:/Users/Marcel/OneDrive - UNIVERSIDAD DE SEVILLA/GitHub/shopping-cart-nfc/README.md HASHES DOESN'T MATCH!
-CRITICAL:10/29/2020 17:36:17: EXAMEN INTERRUMPIDO
-CRITICAL:10/29/2020 17:36:43: HIDS CERRADO
-INFO:10/29/2020 17:36:45: La configuración se ha importado correctamente!
-INFO:10/29/2020 17:36:48: Hashes importados correctamente!
-INFO:10/29/2020 17:36:48: Calculando los hashes de los archivos...
-INFO:10/29/2020 17:36:49: Hashes calculados satisfactoriamente!
-INFO:10/29/2020 17:36:49: Number of files OK: 2874
-INFO:10/29/2020 17:36:49: Number of files BAD: 1
-WARNING:10/29/2020 17:36:49: BAD integrity files: 
-           DIR: C:/Users/Marcel/OneDrive - UNIVERSIDAD DE SEVILLA/GitHub/shopping-cart-nfc/README.md HASHES DOESN'T MATCH!
-INFO:10/29/2020 17:37:03: Calculando los hashes de los archivos...
-INFO:10/29/2020 17:37:04: Hashes calculados satisfactoriamente!
-INFO:10/29/2020 17:37:04: Number of files OK: 2874
-INFO:10/29/2020 17:37:04: Number of files BAD: 1
-WARNING:10/29/2020 17:37:04: BAD integrity files: 
-           DIR: C:/Users/Marcel/OneDrive - UNIVERSIDAD DE SEVILLA/GitHub/shopping-cart-nfc/README.md HASHES DOESN'T MATCH!
-CRITICAL:10/29/2020 17:37:12: EXAMEN INTERRUMPIDO
-CRITICAL:10/29/2020 17:56:33: EXAMEN INTERRUMPIDO
-CRITICAL:10/29/2020 17:56:36: HIDS CERRADO
+INFO:02/28/2023 00:32:28: Archivo de configuración creado satisfactoriamente!
+INFO:02/28/2023 00:32:28: La configuración se ha importado correctamente!
+INFO:02/28/2023 00:36:15: Hashes exportados correctamente en: 0:00:00.137631
+INFO:02/28/2023 00:36:15: Hashes importados correctamente!
+INFO:02/28/2023 00:36:15: Calculando los hashes de los archivos...
+INFO:02/28/2023 00:36:15: Número de archivos OK: 1005
+INFO:02/28/2023 00:36:15: Número de archivos MODIFICADOS: 0
+INFO:02/28/2023 00:36:15: Comprobación realizada con éxito en: 0:00:00.188496
+INFO:02/28/2023 00:36:25: Calculando los hashes de los archivos...
+INFO:02/28/2023 00:36:26: Número de archivos OK: 1005
+INFO:02/28/2023 00:36:26: Número de archivos MODIFICADOS: 0
+INFO:02/28/2023 00:36:26: Comprobación realizada con éxito en: 0:00:00.199064
+CRITICAL:02/28/2023 00:36:27: EXAMEN INTERRUMPIDO
+INFO:02/28/2023 00:40:11: Hashes exportados correctamente en: 0:00:00.117686
+INFO:02/28/2023 00:40:11: Hashes importados correctamente!
+INFO:02/28/2023 00:40:11: Calculando los hashes de los archivos...
+INFO:02/28/2023 00:40:11: Número de archivos OK: 1005
+INFO:02/28/2023 00:40:11: Número de archivos MODIFICADOS: 0
+INFO:02/28/2023 00:40:11: Comprobación realizada con éxito en: 0:00:00.176528
+INFO:02/28/2023 00:40:21: Calculando los hashes de los archivos...
+INFO:02/28/2023 00:40:21: Número de archivos OK: 1005
+INFO:02/28/2023 00:40:21: Número de archivos MODIFICADOS: 0
+INFO:02/28/2023 00:40:21: Comprobación realizada con éxito en: 0:00:00.181515
+INFO:02/28/2023 00:40:31: Calculando los hashes de los archivos...
+INFO:02/28/2023 00:40:31: Número de archivos OK: 1005
+INFO:02/28/2023 00:40:31: Número de archivos MODIFICADOS: 0
+INFO:02/28/2023 00:40:31: Comprobación realizada con éxito en: 0:00:00.202426
+INFO:02/28/2023 00:40:41: Calculando los hashes de los archivos...
+INFO:02/28/2023 00:40:41: Número de archivos OK: 1005
+INFO:02/28/2023 00:40:41: Número de archivos MODIFICADOS: 0
+INFO:02/28/2023 00:40:41: Comprobación realizada con éxito en: 0:00:00.178658
+CRITICAL:02/28/2023 00:40:45: EXAMEN INTERRUMPIDO
+CRITICAL:02/28/2023 00:40:49: HIDS CERRADO
+INFO:02/28/2023 00:41:58: La configuración se ha importado correctamente!
+INFO:02/28/2023 00:42:04: Hashes exportados correctamente en: 0:00:00.145202
+INFO:02/28/2023 00:42:04: Hashes importados correctamente!
+INFO:02/28/2023 00:42:04: Calculando los hashes de los archivos...
+INFO:02/28/2023 00:42:04: Número de archivos OK: 1005
+INFO:02/28/2023 00:42:04: Número de archivos MODIFICADOS: 0
+INFO:02/28/2023 00:42:04: Comprobación realizada con éxito en: 0:00:00.174047
+INFO:02/28/2023 00:42:14: Calculando los hashes de los archivos...
+INFO:02/28/2023 00:42:15: Número de archivos OK: 1005
+INFO:02/28/2023 00:42:15: Número de archivos MODIFICADOS: 0
+INFO:02/28/2023 00:42:15: Comprobación realizada con éxito en: 0:00:00.183509
+INFO:02/28/2023 00:42:25: Calculando los hashes de los archivos...
+INFO:02/28/2023 00:42:25: Número de archivos OK: 1005
+INFO:02/28/2023 00:42:25: Número de archivos MODIFICADOS: 0
+INFO:02/28/2023 00:42:25: Comprobación realizada con éxito en: 0:00:00.178052
+INFO:02/28/2023 00:42:35: Calculando los hashes de los archivos...
+INFO:02/28/2023 00:42:35: Número de archivos OK: 1004
+INFO:02/28/2023 00:42:35: Número de archivos MODIFICADOS: 1
+WARNING:02/28/2023 00:42:35: Archivos con integridad comprometida: 
+           DIR: C:/prueba/hola mundo.docx ¡Los hashes no coinciden!
+INFO:02/28/2023 00:42:35: Comprobación realizada con éxito en: 0:00:00.189462
+INFO:02/28/2023 00:42:45: Calculando los hashes de los archivos...
+INFO:02/28/2023 00:42:45: Número de archivos OK: 1004
+INFO:02/28/2023 00:42:45: Número de archivos MODIFICADOS: 1
+WARNING:02/28/2023 00:42:45: Archivos con integridad comprometida: 
+           DIR: C:/prueba/hola mundo.docx ¡Los hashes no coinciden!
+INFO:02/28/2023 00:42:45: Comprobación realizada con éxito en: 0:00:00.215633
+CRITICAL:02/28/2023 00:42:46: EXAMEN INTERRUMPIDO
+CRITICAL:02/28/2023 01:00:41: HIDS CERRADO

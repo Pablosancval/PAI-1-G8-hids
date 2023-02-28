@@ -12,7 +12,6 @@ import sys
 from threading import Thread
 from tkinter.scrolledtext import ScrolledText
 from win10toast import ToastNotifier
-import smtplib
 from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
@@ -140,12 +139,11 @@ def importConfig():   ## explicado en el comentario
         except:
             logging.error("Error al importar la configuración!")
     else:
-        configs = ["\nSelected Hash mode=\n",
-                   "Directories to protect=\n", "Verify interval=\n", "email=\n", "smtpPass=\n", "toEmail=\n"]
+        configs = ["\n"]
         try:
             with open(os.path.abspath('.').split(os.path.sep)[0]+os.path.sep+"top_secret\config.config", "w") as file:
                 file.write(
-                    "# Agregar los directorios a proteger, separados por una coma\n# Intervalo de tiempo entre examenes en minutos\n# Guardar la configuracion antes de iniciar el examen")
+                    "# Pasos a seguir para hacer funcionar la aplicación.\n# Elegir un directorio que vigilar con el botón seleccionar directorio\n# Seleccionar del menú desplegable el hash a utilizar\n# Seleccionar el intervalo de tiempo entre examenes en segundos\n# Iniciar el examen lanza el programa con la configuración establecida\n# Para pararlo, finalmente pulsar parar el examen\n# Abrir gráfico histórico muestra los errores de todo el log\n# Abrir último gráfico muestra una representación del último log guardado en el fichero")
                 for config in configs:
                     file.write(config)
             logging.info("Archivo de configuración creado satisfactoriamente!")
@@ -154,14 +152,6 @@ def importConfig():   ## explicado en el comentario
             logging.error(
                 "Error al crear el archivo de configuración, problema con los permisos?")
         importConfig()
-
-
-def exportConfig():  ## npi
-    """ Params: NONE """
-    """ Return: NONE """
-    """ Escribe en el archivo 'C:\top_secret\config.config' las configuraciones reflejadas en la caja de texto del script """
-    with open(os.path.abspath('.').split(os.path.sep)[0]+os.path.sep+"top_secret\config.config", "w") as config:
-        config.write(entry.get("1.0", tk.END))
 
 
 def exportHashedFiles():  ## vale, esta parece ser la función que guarda los hashes
@@ -247,7 +237,6 @@ def compareHashes():  ## comparador de hashes para comprobar que los archivos no
         logging.warning(str3 + "\n" + '\n'.join(noMatchesToPrint))
         toaster.show_toast(
             "HIDS", "Hay un problema integridad. Revisar LOG.", duration=interval, threaded=True)
-        sendEmail(str3 + "\n" + '\n'.join(noMatchesToPrint))
     else:
         toaster.show_toast(
             "HIDS", "Examen finalizado. Se mantiene la integridad.", duration=interval, threaded=True)
@@ -323,26 +312,6 @@ def initExam():  ## parece una prueba de los logs y tal
     importHashedFiles()
     runHandle()
 
-
-def sendEmail(bodyMsg):  ## entiendo que esto es para un aviso por correo cuando se realiza un fallo en la verificación
-    try:
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.ehlo()
-        server.starttls()
-        server.ehlo()
-
-        server.login(configDict["email"], configDict["smtpPass"])
-        subject = "¡Problema con la integridad de los archivos!"
-        body = bodyMsg
-        msg = f"Subject: {subject}\n\n{body}".encode('utf-8')
-        emailList = configDict["toEmail"].split(",")
-        for email in emailList:
-            server.sendmail("gigi.dan2011@gmail.com", email, msg)
-        server.quit()
-    except:
-        print("Ha ocurrido un error enviando el mensaje.")
-
-
 def theme_swap():
     global switch_value
     global currentThemeBG
@@ -375,40 +344,40 @@ def gui():
 
     question_menu = tk.OptionMenu(window,valor_seleccionado,*lista_hashes)
     question_menu.pack(pady=15, padx=15)
-    question_menu.place(x=20, y=350)
+    question_menu.place(x=570, y=330)
     question_menu.config(bg=currentThemeBG, fg=currentThemeFont)
 
     btnDirectory = tk.Button(window, bg=currentThemeBG, text="Seleccionar directorio", fg=currentThemeFont, command=openDirectory)
     btnDirectory.pack(pady=15, padx=15)
-    btnDirectory.place(x=20, y=390)
+    btnDirectory.place(x=600, y=380)
 
     interval_menu = tk.OptionMenu(window,intervalo_seleccionado,*lista_intervalos)
     interval_menu.pack(pady=15, padx=15)
-    interval_menu.place(x=100, y=350)
+    interval_menu.place(x=670, y=330)
     interval_menu.config(bg=currentThemeBG, fg=currentThemeFont)
 
-    labelConf = tk.Label(window, bg=currentThemeBG, text="Fichero de configuración", fg=currentThemeFont, font=("Arial", 14))
+    labelConf = tk.Label(window, bg=currentThemeBG, text="Información", fg=currentThemeFont, font=("Arial", 14))
     labelLog = tk.Label(window, bg=currentThemeBG, text="Fichero de log en tiempo real", fg=currentThemeFont, font=("Arial", 14))
     labelConf.pack()
-    labelConf.place(x=180, y=333)
+    labelConf.place(x=230, y=333)
     labelLog.pack()
     labelLog.place(x=870, y=333)
     entry.pack()
     entry.config(bg=currentThemeBG, fg=currentThemeFont)
     entry.place(x=5, y=0)
     window.config(bg=currentThemeBG)
-    btnGraph = tk.Button(window, bg=currentThemeBG, text="Abrir grafico", fg=currentThemeFont, command=graph2)
-    btnGraph.pack(pady=15, padx=15)
-    btnGraph.place(x=630, y=435)
+    btnGraphLatest = tk.Button(window, bg=currentThemeBG, text="Abrir último gráfico", fg=currentThemeFont, command=graph2)
+    btnGraphLatest.pack(pady=15, padx=15)
+    btnGraphLatest.place(x=670, y=455)
+    btnGraphHistoric = tk.Button(window, bg=currentThemeBG, text="Abrir grafico histórico", fg=currentThemeFont, command=graph)
+    btnGraphHistoric.pack(pady=15, padx=15)
+    btnGraphHistoric.place(x=530, y=455)
     btnIniciar = tk.Button(window, bg=currentThemeBG, text="Iniciar el examen", fg=currentThemeFont, command=initExam)
     btnIniciar.pack(pady=15, padx=15)
-    btnIniciar.place(x=510, y=435)
+    btnIniciar.place(x=420, y=455)
     btnDetener = tk.Button(window, bg=currentThemeBG, text="Parar el examen", fg=currentThemeFont, command=stop)
     btnDetener.pack(pady=15, padx=15)
-    btnDetener.place(x=730, y=435)
-    btnGuardar = tk.Button(window, bg=currentThemeBG, text="Guardar configuración", fg=currentThemeFont, command=exportConfig)
-    btnGuardar.pack(pady=15, padx=15)
-    btnGuardar.place(x=220, y=370)
+    btnDetener.place(x=795, y=455)
     logBox.pack()
     logBox.config(bg=currentThemeBG, fg=currentThemeFont)
     logBox.place(x=670, y=0)

@@ -7,12 +7,12 @@ setup(
     license='MIT',
     # Give a short description about your library
     description='Simple hids python script',
-    author='Gigi Marcel Dan ',                   # Type in your name
-    author_email='gigi.dan2011@gmail.com',      # Type in your E-Mail
+    author='Sánchez Valenzuela Pablo',                   # Type in your name
+    author_email='pablosancval@gmail.com',      # Type in your E-Mail
     # Provide either the link to your github or to your website
-    url='https://github.com/MarcelDnB/hids',
+    url='https://github.com/Pablosancval/PAI-1-G8-hids',
     # I explain this later on
-    download_url='https://github.com/MarcelDnB/hids/archive/v0.1.tar.gz',
+    download_url='https://github.com/Pablosancval/PAI-1-G8-hids.git',
     # Keywords that define your package best
     keywords=['hids', 'python', 'security'],
     install_requires=[            # I get to this in a second
